@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find robot_test1_description)/urdf/common.xacro"/>
+  <xacro:include filename="$(find robot_test1_description)/urdf/wheel/wheel.transmission.xacro"/>
+  <xacro:include filename="$(find robot_test1_description)/urdf/wheel/wheel.gazebo.xacro"/>
+  
+  <xacro:macro name="wheel" params="prefix parent radius length density *origin *axis">
+
+    <xacro:property name="mass" value="${M_PI*radius*radius*length*density}"/>
+    
+    <joint name="${prefix}_wheel_joint" type="continuous">
+      <xacro:insert_block name="origin"/>
+      <xacro:insert_block name="axis"/>
+      <parent link="${parent}"/>
+      <child link="${prefix}_wheel"/>
+    </joint>
+
+    <link name="${prefix}_wheel">
+      <visual>
+        <geometry>
+          <cylinder radius="${radius}" length="${length}"/>
+        </geometry>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+      </visual>
+
+      <collision>
+        <geometry>
+          <cylinder radius="${radius}" length="${length}"/>
+        </geometry>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+      </collision>
+
+      <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <mass value="${mass}"/>
+        <inertia
+            ixx="${mass*radius*radius/4+mass*length*length/12}" ixy="0" ixz="0"
+            iyy="${mass*radius*radius/4+mass*length*length/12}" iyz="0" izz="${mass*radius*radius/2}"/>
+      </inertial>
+      
+    </link>
+  </xacro:macro>
+
+</robot>
+

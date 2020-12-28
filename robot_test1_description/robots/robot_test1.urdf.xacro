@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<robot name="robot_test1" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find robot_test1_description)/urdf/common.xacro"/>
+  <xacro:include filename="$(find robot_test1_description)/urdf/base/base.urdf.xacro"/>
+  <xacro:include filename="$(find robot_test1_description)/urdf/wheel/wheel.urdf.xacro"/>
+  <xacro:include filename="$(find robot_test1_description)/urdf/wheel/idler_wheel.urdf.xacro"/>
+
+  <link name="base_footprint"/>
+
+  <xacro:base parent="base_footprint" x="1.0" y="0.8" z="0.2" density="2700">
+    <origin xyz="0 0 0.2" rpy="0 0 0"/>
+  </xacro:base>
+
+  <xacro:wheel prefix="left" parent="base_link" radius="0.2" length="0.05" density="2700">
+    <origin xyz="0 0.43 0" rpy="${-M_PI/2} 0 0"/>
+    <axis xyz="0 0 1"/>
+  </xacro:wheel>
+
+  <xacro:wheel prefix="right" parent="base_link" radius="0.2" length="0.05" density="2700">
+    <origin xyz="0 -0.43 0" rpy="${-M_PI/2} 0 0"/>
+    <axis xyz="0 0 1"/>
+  </xacro:wheel>
+
+  <xacro:idler_wheel prefix="front" parent="base_link" radius="0.04" x_offset="0.04" z_offset="0.06" density="2700">
+    <origin xyz="0.8 0 -0.1"/>
+  </xacro:idler_wheel>
+
+
+  <!-- Gazebo config -->
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <!-- <robotNamespace>robot_test1</robotNamespace> -->
+    </plugin>
+  </gazebo>
+
+  <xacro:base_gazebo/>
+  <xacro:wheel_gazebo prefix="left"/>
+  <xacro:wheel_gazebo prefix="right"/>
+  <xacro:idler_wheel_gazebo prefix="front"/>
+
+</robot>
+
+

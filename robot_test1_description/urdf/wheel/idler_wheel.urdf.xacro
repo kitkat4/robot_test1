@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find robot_test1_description)/urdf/wheel/idler_wheel.gazebo.xacro"/>
+  <xacro:include filename="$(find robot_test1_description)/urdf/wheel/wheel.urdf.xacro"/>
+  <xacro:include filename="$(find robot_test1_description)/urdf/common.xacro"/>
+
+  <xacro:macro name="idler_wheel" params="prefix parent radius x_offset z_offset density *origin">
+
+    <xacro:property name="mass" value="${M_PI*x_offset*x_offset*z_offset*density}"/>
+    
+    <joint name="${prefix}_idler_wheel_base_joint" type="continuous">
+      <xacro:insert_block name="origin"/>
+      <axis xyz="0 0 1"/>
+      <parent link="${parent}"/>
+      <child link="${prefix}_idler_wheel_base"/>
+    </joint>
+
+    <link name="${prefix}_idler_wheel_base">
+      
+      <visual>
+        <geometry>
+          <cylinder radius="${x_offset}" length="${z_offset}"/>
+        </geometry>
+        <origin xyz="0 0 -${z_offset/2}" rpy="0 0 0"/>
+      </visual>
+      
+      <collision>
+        <geometry>
+          <cylinder radius="${x_offset}" length="${z_offset}"/>
+        </geometry>
+        <origin xyz="0 0 -${z_offset/2}" rpy="0 0 0"/>
+      </collision>
+
+      <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <mass value="${mass}"/>
+        <inertia
+            ixx="${mass*x_offset*x_offset/4+mass*z_offset*z_offset/12+mass*z_offset*z_offset/4}" ixy="0" ixz="0"
+            iyy="${mass*x_offset*x_offset/4+mass*z_offset*z_offset/12+mass*z_offset*z_offset/4}" iyz="0"
+            izz="${mass*x_offset*x_offset/2}"/>
+      </inertial>
+      
+    </link>
+
+    <xacro:wheel prefix="${prefix}_idler" parent="${prefix}_idler_wheel_base"
+                 radius="${radius}" length="${radius/2}" density="${density}">
+      <origin xyz="-${x_offset} 0 -${z_offset}" rpy="-${M_PI/2} 0 0"/>
+      <axis xyz="0 0 1"/>
+    </xacro:wheel>
+
+  </xacro:macro>
+  
+</robot>
