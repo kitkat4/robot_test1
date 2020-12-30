@@ -1,11 +1,12 @@
 <launch>
 
   <arg name="model" default="$(find robot_test1_description)/robots/robot_test1.urdf.xacro"/>
-  <arg name="paused" default="false"/>
+  <arg name="paused" default="true"/>
   <arg name="use_sim_time" default="true"/>
   <arg name="gui" default="true"/>
   <arg name="headless" default="false"/>
   <arg name="debug" default="false"/>
+  <arg name="verbose" default="true"/>
 
 
   <!-- Launch Gazebo -->
@@ -15,6 +16,7 @@
     <arg name="paused" value="$(arg paused)"/>
     <arg name="use_sim_time" value="$(arg use_sim_time)"/>
     <arg name="headless" value="$(arg headless)"/>
+    <arg name="verbose" value="$(arg verbose)"/>
   </include>
 
 
@@ -23,6 +25,9 @@
 
   <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
         args="-urdf -model robot_test1 -param robot_description"/>
+
+  <!-- Launch Controller -->
+  <include file="$(find robot_test1_control)/launch/robot_test1_control.launch"/>
   
 </launch>
 

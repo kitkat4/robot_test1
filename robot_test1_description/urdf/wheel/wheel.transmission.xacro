@@ -6,10 +6,11 @@
     <transmission name="${prefix}_wheel_transmission">
       <type>transmission_interface/SimpleTransmission</type>
       <joint name="${prefix}_wheel_joint">
-        <hardware_interface>VelocityJointInterface</hardware_interface>
+        <hardwareInterface>VelocityJointInterface</hardwareInterface>
       </joint>
       <actuator name="${prefix}_wheel_motor">
-        <mechanical_reduction>30</mechanical_reduction>
+        <hardwareInterface>VelocityJointInterface</hardwareInterface>
+        <mechanicalReduction>30</mechanicalReduction>
       </actuator>
     </transmission>
     

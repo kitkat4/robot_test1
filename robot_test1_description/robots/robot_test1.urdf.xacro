@@ -26,6 +26,10 @@
     <origin xyz="0.8 0 -0.1"/>
   </xacro:idler_wheel>
 
+  <!-- Transmissions -->
+  <xacro:wheel_transmission prefix="left"/>
+  <xacro:wheel_transmission prefix="right"/>
+
 
   <!-- Gazebo config -->
   <gazebo>
