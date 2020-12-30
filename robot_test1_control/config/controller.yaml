@@ -10,24 +10,24 @@ diff_drive_controller:
   pose_covariance_diagonal: [0.001, 0.001, 1000000.0, 1000000.0, 1000000.0, 1000.0]
   twist_covariance_diagonal: [0.001, 0.001, 1000000.0, 1000000.0, 1000000.0, 1000.0]
 
-base_frame_id: base_footprint
+  base_frame_id: base_footprint
 
-linear:
-  x:
-    has_velocity_limits    : true
-    max_velocity           : 1.0  # m/s
-    min_velocity           : -1.0 # m/s
-    has_acceleration_limits: true
-    max_acceleration       : 0.5  # m/s^2
-    min_acceleration       : -0.5 # m/s^2
-angular:
-  z:
-    has_velocity_limits    : true
-    max_velocity           : 3.1415  # rad/s
-    min_velocity           : -3.1415
-    has_acceleration_limits: true
-    max_acceleration       : 1.0  # rad/s^2
-    min_acceleration       : -1.0
-  
+  linear:
+    x:
+      has_velocity_limits    : true
+      max_velocity           : 1.0  # m/s
+      min_velocity           : -1.0 # m/s
+      has_acceleration_limits: true
+      max_acceleration       : 0.5  # m/s^2
+      min_acceleration       : -0.5 # m/s^2
+  angular:
+    z:
+      has_velocity_limits    : true
+      max_velocity           : 3.1415  # rad/s
+      min_velocity           : -3.1415
+      has_acceleration_limits: true
+      max_acceleration       : 1.0  # rad/s^2
+      min_acceleration       : -1.0
+      
 
 

@@ -32,7 +32,7 @@
       </collision>
 
       <inertial>
-        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <origin xyz="${offset} 0 0" rpy="0 0 0"/>
         <mass value="${mass}"/>
         <inertia
             ixx="${mass*(y*y+z*z)/12}" ixy="0" ixz="0"

@@ -6,7 +6,9 @@
         args="joint_state_controller diff_drive_controller"/>
 
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
-        respawn="false" output="screen"/>
+        respawn="false" output="screen">
+    <!-- <param name="use_tf_static" value="false"/> -->
+  </node>
   
 </launch>
 
