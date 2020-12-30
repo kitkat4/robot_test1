@@ -5,10 +5,11 @@
   <xacro:include filename="$(find robot_test1_description)/urdf/base/base.urdf.xacro"/>
   <xacro:include filename="$(find robot_test1_description)/urdf/wheel/wheel.urdf.xacro"/>
   <xacro:include filename="$(find robot_test1_description)/urdf/wheel/idler_wheel.urdf.xacro"/>
+  <xacro:include filename="$(find robot_test1_description)/urdf/sensors/lidar_2d/lidar_2d.urdf.xacro"/>
 
   <link name="base_footprint"/>
 
-  <xacro:base parent="base_footprint" x="1.0" y="0.8" z="0.2" density="2700">
+  <xacro:base parent="base_footprint" x="1.0" y="0.8" z="0.2" density="1000">
     <origin xyz="0 0 0.2" rpy="0 0 0"/>
   </xacro:base>
 
@@ -22,9 +23,14 @@
     <axis xyz="0 0 1"/>
   </xacro:wheel>
 
-  <xacro:idler_wheel prefix="front" parent="base_link" radius="0.04" x_offset="0.04" z_offset="0.06" density="2700">
+  <xacro:idler_wheel prefix="front" parent="base_link" radius="0.04" x_offset="0.04" z_offset="0.06" density="270000">
     <origin xyz="0.8 0 -0.1"/>
   </xacro:idler_wheel>
+
+  <xacro:lidar_2d prefix="front" parent="base_link">
+    <origin xyz="0.8 0 ${0.1 + 0.06}"/>
+  </xacro:lidar_2d>
+  
 
   <!-- Transmissions -->
   <xacro:wheel_transmission prefix="left"/>
@@ -42,6 +48,15 @@
   <xacro:wheel_gazebo prefix="left"/>
   <xacro:wheel_gazebo prefix="right"/>
   <xacro:idler_wheel_gazebo prefix="front"/>
+  <xacro:lidar_2d_gazebo
+      prefix="front"
+      angle_min="${-radians(275.0 / 2)}"
+      angle_max="${radians(275.0 / 2)}"
+      angle_increment="${radians(0.17)}"
+      range_min="0.0"
+      range_max="30.0"
+      rate="${1.0/0.03}"
+      noise_sigma="0.01" />
 
 </robot>
 

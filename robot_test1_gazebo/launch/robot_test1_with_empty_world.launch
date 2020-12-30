@@ -7,6 +7,10 @@
   <arg name="headless" default="false"/>
   <arg name="debug" default="false"/>
   <arg name="verbose" default="true"/>
+  <arg name="x" default="0"/>
+  <arg name="y" default="0"/>
+  <arg name="z" default="0"/>
+  <arg name="yaw" default="0"/>
 
 
   <!-- Launch Gazebo -->
@@ -24,7 +28,7 @@
   <param name="robot_description" command="$(find xacro)/xacro.py '$(arg model)'"/>
 
   <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
-        args="-urdf -model robot_test1 -param robot_description"/>
+        args="-urdf -model robot_test1 -param robot_description -x $(arg x) -y $(arg y) -z $(arg z) -Y $(arg yaw)"/>
 
   <!-- Launch Controller -->
   <include file="$(find robot_test1_control)/launch/robot_test1_control.launch"/>
