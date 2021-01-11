@@ -37,8 +37,14 @@
   <!-- Launch Controller -->
   <include file="$(find robot_test1_control)/launch/robot_test1_control.launch"/>
 
+  <!-- Localization -->
   <include file="$(find robot_test1_slam)/launch/gmapping.launch">
     <arg name="scan_topic" value="front_lidar_2d_link/scan"/>
+  </include>
+
+  <!-- Navigation -->
+  <include file="$(find robot_test1_nav)/launch/move_base.launch">
+    <arg name="cmd_vel_topic" value="/diff_drive_controller/cmd_vel"/>
   </include>
 
   <group if="$(arg rviz)">
