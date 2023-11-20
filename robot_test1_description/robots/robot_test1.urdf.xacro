@@ -6,6 +6,7 @@
   <xacro:include filename="$(find robot_test1_description)/urdf/wheel/wheel.urdf.xacro"/>
   <xacro:include filename="$(find robot_test1_description)/urdf/wheel/idler_wheel.urdf.xacro"/>
   <xacro:include filename="$(find robot_test1_description)/urdf/sensors/lidar_2d/lidar_2d.urdf.xacro"/>
+  <xacro:include filename="$(find velodyne_description)/urdf/HDL-32E.urdf.xacro"/>
 
   <link name="base_footprint"/>
 
@@ -57,6 +58,10 @@
       range_max="30.0"
       rate="${1.0/0.03}"
       noise_sigma="0.01" />
+
+  <xacro:HDL-32E gpu="true">
+    <origin xyz="0 0 0.5" rpy="0 0 0"/>
+  </xacro:HDL-32E>
 
 </robot>
 
